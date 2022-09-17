@@ -90,7 +90,7 @@ public class FrmRegistroAutor extends JInternalFrame {
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setFont(new Font("Sitka Text", Font.BOLD, 14));
 		btnLimpiar.setBackground(Color.DARK_GRAY);
-		btnLimpiar.setBounds(273, 343, 107, 40);
+		btnLimpiar.setBounds(280, 343, 107, 40);
 		getContentPane().add(btnLimpiar);
 	}
 }
