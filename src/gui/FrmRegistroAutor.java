@@ -91,7 +91,7 @@ public class FrmRegistroAutor extends JInternalFrame {
 		
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setFont(new Font("Sitka Text", Font.BOLD, 14));
-		btnLimpiar.setBounds(213, 393, 106, 40);
+		btnLimpiar.setBounds(212, 393, 106, 40);
 		getContentPane().add(btnLimpiar);
 		
 		JLabel lblGrado = new JLabel("Grado :");
