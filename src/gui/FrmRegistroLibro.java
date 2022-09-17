@@ -34,9 +34,9 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 	  JLabel lblNewLabel_3;
 	  JTextField textCategoria;
 	   JButton btnLimpiar;
-	   JLabel lblNewLabel_4;
 	   JButton btnVer;
 	   private JComboBox cboCategori;
+	   private JLabel lblNewLabel_4;
 
 	public FrmRegistroLibro() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -100,12 +100,6 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		btnLimpiar.setBounds(345, 492, 242, 33);
 		getContentPane().add(btnLimpiar);
 		
-		lblNewLabel_4 = new JLabel("REGISTRO DE LIBROS");
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setFont(new Font("NSimSun", Font.PLAIN, 42));
-		lblNewLabel_4.setBounds(230, 25, 501, 33);
-		getContentPane().add(lblNewLabel_4);
-		
 		btnVer = new JButton("Ver");
 		btnVer.addActionListener(this);
 		btnVer.setBounds(735, 346, 89, 23);
@@ -114,6 +108,11 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		cboCategori = new JComboBox();
 		cboCategori.setBounds(464, 389, 254, 22);
 		getContentPane().add(cboCategori);
+		
+		lblNewLabel_4 = new JLabel("Registro Libro");
+		lblNewLabel_4.setFont(new Font("Trebuchet MS", Font.PLAIN, 23));
+		lblNewLabel_4.setBounds(499, 40, 280, 28);
+		getContentPane().add(lblNewLabel_4);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnVer) {
