@@ -169,6 +169,10 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		}	
 	}
 	protected void actionPerformedBtnLimpiarJButton(ActionEvent e) {
-		
+		txtNumero.setText("");
+		txtNumAlum.setText("");
+		txtPiso.setText("");
+		txtRecursos.setText("");
+		txtNumero.requestFocus();	
 	}
 }
