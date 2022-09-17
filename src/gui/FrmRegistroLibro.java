@@ -36,6 +36,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 	   JButton btnLimpiar;
 	   JLabel lblNewLabel_4;
 	   JButton btnVer;
+	   private JComboBox cboCategori;
 
 	public FrmRegistroLibro() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -109,6 +110,10 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		btnVer.addActionListener(this);
 		btnVer.setBounds(735, 346, 89, 23);
 		getContentPane().add(btnVer);
+		
+		cboCategori = new JComboBox();
+		cboCategori.setBounds(464, 389, 254, 22);
+		getContentPane().add(cboCategori);
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnVer) {
