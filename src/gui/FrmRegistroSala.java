@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.JFrame;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -8,14 +9,20 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import entidad.Grado;
 import entidad.Sala;
+import entidad.Sede;
 import model.SalaModel;
+import util.JComboBoxBD;
 import util.Validaciones;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.rmi.server.ObjID;
+import java.util.ResourceBundle;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 
@@ -24,10 +31,10 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 	 JTextField txtPiso;
 	 JTextField txtRecursos;
 	 JTextField txtNumAlum;
-	 JTextField txtidSede;
 	 JButton btnProcesar;
 	 private JButton btnLimpiar;
-	 private JButton btnVer;
+	 private JComboBoxBD cboSede;
+	 private ResourceBundle rb = ResourceBundle.getBundle("combo");
 
 	public FrmRegistroSala() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -66,7 +73,7 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		
 		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Sede:");
 		lblNewLabel_1_1_1_1_1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 18));
-		lblNewLabel_1_1_1_1_1.setBounds(311, 291, 170, 45);
+		lblNewLabel_1_1_1_1_1.setBounds(304, 291, 170, 45);
 		getContentPane().add(lblNewLabel_1_1_1_1_1);
 		
 		txtNumero = new JTextField();
@@ -89,11 +96,6 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		txtNumAlum.setBounds(679, 130, 124, 31);
 		getContentPane().add(txtNumAlum);
 		
-		txtidSede = new JTextField();
-		txtidSede.setColumns(10);
-		txtidSede.setBounds(400, 300, 124, 31);
-		getContentPane().add(txtidSede);
-		
 		btnProcesar = new JButton("Procesar");
 		btnProcesar.addActionListener(this);
 		btnProcesar.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
@@ -106,11 +108,9 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		btnLimpiar.setBounds(400, 478, 143, 38);
 		getContentPane().add(btnLimpiar);
 		
-		btnVer = new JButton("ver");
-		btnVer.addActionListener(this);
-		btnVer.setFont(new Font("Tempus Sans ITC", Font.BOLD, 20));
-		btnVer.setBounds(556, 300, 109, 27);
-		getContentPane().add(btnVer);
+		cboSede = new JComboBoxBD(rb.getString("SQL_SEDE"));
+		cboSede.setBounds(402, 298, 155, 35);
+		getContentPane().add(cboSede);
 	}
 	
 	public void mensaje(String ms) {
@@ -118,9 +118,6 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnVer) {
-			actionPerformedBtnVerJButton(e);
-		}
 		if (e.getSource() == btnLimpiar) {
 			actionPerformedBtnLimpiarJButton(e);
 		}
@@ -133,7 +130,8 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		String pis = txtPiso.getText();
 		String nalum = txtNumAlum.getText();
 		String rec = txtRecursos.getText();
-		String sed = txtidSede.getText();
+		int indexSede = cboSede.getSelectedIndex();
+		
 		if(!num.matches(Validaciones.TEXTO_NUMERO)) {
 			mensaje("El numero es 1 letra y 3 digitos");
 		}else if(!pis.matches(Validaciones.NUMERO)) {
@@ -142,16 +140,24 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 			mensaje("El número de alumnos es solo digitos");
 		}else if(!rec.matches(Validaciones.TEXTO)) {
 			mensaje("El recurso es 2 a 20 caracteres");
-		}else if(!sed.matches(Validaciones.NUMERO)) {
-			mensaje("La sede es solo digitos");
+		}else if((indexSede ==0)) {
+			mensaje("Seleccione una Sede");
 		}else {
+			String sed = cboSede.getSelectedItem().toString();
+			String idSede = sed.split(":")[0];
+			
+			Sede objSede = new Sede();
+			objSede.setIdSede(Integer.parseInt(idSede));
+			
+			
 			Sala obj = new Sala();
 			obj.setNumero(num);
 			obj.setPiso(Integer.parseInt(pis));
 			obj.setNumAlumnos(Integer.parseInt(nalum));
-			obj.setRecursos(rec);
+			obj.setSede(objSede);
 			obj.setEstado(1);
-			obj.setIdSede(Integer.parseInt(sed));
+			
+			
 			
 			SalaModel model = new SalaModel();
 			int s = model.insertarSala(obj);
@@ -163,9 +169,6 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		}	
 	}
 	protected void actionPerformedBtnLimpiarJButton(ActionEvent e) {
-		
-	}
-	protected void actionPerformedBtnVerJButton(ActionEvent e) {
 		
 	}
 }

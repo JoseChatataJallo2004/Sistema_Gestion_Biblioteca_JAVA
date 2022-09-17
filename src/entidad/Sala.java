@@ -10,7 +10,7 @@ public class Sala {
 	private String recursos;
 	private Date fechaRegistro;
 	private int estado;
-	private int idSede;
+	private Sede sede;
 	
 	public int getIdSala() {
 		return idSala;
@@ -54,10 +54,12 @@ public class Sala {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	public int getIdSede() {
-		return idSede;
+	public Sede getSede() {
+		return sede;
 	}
-	public void setIdSede(int idSede) {
-		this.idSede = idSede;
+	public void setSede(Sede sede) {
+		this.sede = sede;
 	}
+	
+	
 }
