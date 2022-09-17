@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JButton;
 
 public class FrmRegistroAlumno extends JInternalFrame {
 
@@ -93,5 +94,9 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		JLabel lblPais = new JLabel("Pais:");
 		lblPais.setBounds(56, 374, 46, 14);
 		getContentPane().add(lblPais);
+		
+		JButton btnGrabar = new JButton("Grabar");
+		btnGrabar.setBounds(205, 443, 89, 23);
+		getContentPane().add(btnGrabar);
 	}
 }
