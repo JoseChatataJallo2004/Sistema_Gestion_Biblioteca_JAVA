@@ -18,9 +18,9 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(null);
 		
-		JLabel lblTitulo = new JLabel("Registro de Alumno:");
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTitulo.setBounds(491, 36, 192, 35);
-		getContentPane().add(lblTitulo);
+		JLabel lblAlumno = new JLabel("Registro de Alumno:");
+		lblAlumno.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAlumno.setBounds(465, 28, 230, 81);
+		getContentPane().add(lblAlumno);
 	}
 }
