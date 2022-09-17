@@ -84,7 +84,7 @@ public class FrmRegistroAutor extends JInternalFrame {
 		btnRegistrar.setForeground(new Color(0, 128, 0));
 		btnRegistrar.setBackground(Color.DARK_GRAY);
 		btnRegistrar.setFont(new Font("Sitka Text", Font.BOLD, 14));
-		btnRegistrar.setBounds(453, 343, 107, 40);
+		btnRegistrar.setBounds(463, 343, 107, 40);
 		getContentPane().add(btnRegistrar);
 		
 		JButton btnLimpiar = new JButton("Limpiar");
