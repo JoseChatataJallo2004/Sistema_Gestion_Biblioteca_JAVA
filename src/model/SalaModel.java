@@ -28,7 +28,7 @@ public class SalaModel {
 			pstm.setInt(3, obj.getNumAlumnos());
 			pstm.setString(4, obj.getRecursos());
 			pstm.setInt(5,obj.getEstado());
-			pstm.setInt(6, obj.getIdSede());
+			pstm.setInt(6, obj.getSede().getIdSede());
 			
 			System.out.println(pstm);
 			
