@@ -66,7 +66,7 @@ public class FrmRegistroAutor extends JInternalFrame {
 		
 		txtFechaN = new JTextField();
 		txtFechaN.setColumns(10);
-		txtFechaN.setBounds(422, 221, 107, 20);
+		txtFechaN.setBounds(416, 221, 107, 20);
 		getContentPane().add(txtFechaN);
 		
 		JLabel lblTelefono = new JLabel("Telefono  :");
