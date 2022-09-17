@@ -27,70 +27,70 @@ public class FrmRegistroAutor extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("Ingreso de Autor");
-		setBounds(100, 100, 900, 600);
+		setBounds(100, 100, 740, 600);
 		getContentPane().setLayout(null);
 		
 		JLabel lblTitulo = new JLabel("REGISTRO DE AUTOR");
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Tempus Sans ITC", Font.BOLD, 26));
-		lblTitulo.setBounds(273, 26, 297, 40);
+		lblTitulo.setBounds(212, 55, 297, 40);
 		getContentPane().add(lblTitulo);
 		
 		JLabel lblNombres = new JLabel("Nombres  :");
 		lblNombres.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNombres.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
-		lblNombres.setBounds(268, 121, 107, 35);
+		lblNombres.setBounds(207, 150, 107, 35);
 		getContentPane().add(lblNombres);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(388, 129, 182, 20);
+		txtNombre.setBounds(327, 158, 182, 20);
 		getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos  :");
 		lblApellidos.setHorizontalAlignment(SwingConstants.LEFT);
 		lblApellidos.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
-		lblApellidos.setBounds(268, 167, 107, 35);
+		lblApellidos.setBounds(207, 196, 107, 35);
 		getContentPane().add(lblApellidos);
 		
 		txtApellido = new JTextField();
 		txtApellido.setColumns(10);
-		txtApellido.setBounds(388, 175, 182, 20);
+		txtApellido.setBounds(327, 204, 182, 20);
 		getContentPane().add(txtApellido);
 		
 		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento  :");
 		lblFechaNacimiento.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFechaNacimiento.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
-		lblFechaNacimiento.setBounds(268, 213, 150, 35);
+		lblFechaNacimiento.setBounds(207, 242, 150, 35);
 		getContentPane().add(lblFechaNacimiento);
 		
 		txtFechaN = new JTextField();
 		txtFechaN.setColumns(10);
-		txtFechaN.setBounds(416, 221, 107, 20);
+		txtFechaN.setBounds(355, 250, 107, 20);
 		getContentPane().add(txtFechaN);
 		
 		JLabel lblTelefono = new JLabel("Telefono  :");
 		lblTelefono.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTelefono.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
-		lblTelefono.setBounds(268, 259, 134, 35);
+		lblTelefono.setBounds(207, 288, 134, 35);
 		getContentPane().add(lblTelefono);
 		
 		txtTelefono = new JTextField();
 		txtTelefono.setColumns(10);
-		txtTelefono.setBounds(388, 267, 107, 20);
+		txtTelefono.setBounds(327, 296, 107, 20);
 		getContentPane().add(txtTelefono);
 		
 		JButton btnRegistrar = new JButton("Registrar");
 		btnRegistrar.setForeground(new Color(0, 128, 0));
 		btnRegistrar.setBackground(Color.DARK_GRAY);
 		btnRegistrar.setFont(new Font("Sitka Text", Font.BOLD, 14));
-		btnRegistrar.setBounds(463, 343, 107, 40);
+		btnRegistrar.setBounds(402, 372, 107, 40);
 		getContentPane().add(btnRegistrar);
 		
 		JButton btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setFont(new Font("Sitka Text", Font.BOLD, 14));
 		btnLimpiar.setBackground(Color.DARK_GRAY);
-		btnLimpiar.setBounds(280, 343, 107, 40);
+		btnLimpiar.setBounds(219, 372, 107, 40);
 		getContentPane().add(btnLimpiar);
 	}
 }
