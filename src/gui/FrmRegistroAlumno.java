@@ -7,6 +7,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmRegistroAlumno extends JInternalFrame {
 
@@ -96,7 +98,20 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		getContentPane().add(lblPais);
 		
 		JButton btnGrabar = new JButton("Grabar");
-		btnGrabar.setBounds(205, 443, 89, 23);
+		btnGrabar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedBtnGrabarJButton(e);
+			}
+		});
+		btnGrabar.setBounds(179, 443, 89, 23);
 		getContentPane().add(btnGrabar);
+		
+		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBounds(315, 443, 89, 23);
+		getContentPane().add(btnLimpiar);
+	}
+	
+	protected void actionPerformedBtnGrabarJButton(ActionEvent e) {
+		
 	}
 }
