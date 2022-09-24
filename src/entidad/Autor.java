@@ -1,6 +1,9 @@
 package entidad;
 
 import java.sql.Date;
+
+
+
 public class Autor {
 	
 	private int idAutor;
