@@ -118,7 +118,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 			mensaje("El Titulo  es de 2 a 30 caracteres");
 		}else if (!annio.matches(Validaciones.ANNO)) {
 			mensaje("El Año es de 4 digitos");
-		}else if (!ser.matches(Validaciones.SERIE_LIBRO)) {
+		}else if (!ser.matches(Validaciones.PLACA)) {
 			mensaje("La Serie son 2 Letras y 10 Digitos");
 		}else {
 			
