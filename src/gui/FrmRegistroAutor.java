@@ -114,7 +114,7 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 		lblGrado.setBounds(207, 334, 112, 35);
 		getContentPane().add(lblGrado);
 		
-		JComboBoxBD cboGrado = new JComboBoxBD(rb.getString("SQL_GRADO"));
+		cboGrado = new JComboBoxBD(rb.getString("SQL_GRADO"));
 		cboGrado.setBounds(327, 341, 107, 20);
 		getContentPane().add(cboGrado);
 	}
@@ -142,7 +142,7 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 		} else if (!fec.matches(Validaciones.FECHA)) {
 			mensaje("La fecha tiene como formato YYYY-MM-dd");
 		} else if (!tel.matches(Validaciones.NUMERO)) {
-			mensaje("El numero telefonico es de 9 digitos");
+			mensaje("El n\u00famero telefonico es de 9 d\u00edgitos");
 		} else if(indexGrado == 0) {
 			mensaje("Seleccione un grado");
 		} else {
@@ -162,7 +162,7 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 			AutorModel model = new AutorModel();
 			int salida = model.insertarAutor(objAutor);
 			if(salida>0) {
-				mensaje("Se insertó correctamente");
+				mensaje("Se insert\u00f3 correctamente");
 			} else {
 				mensaje ("Error en el registro");
 			}
