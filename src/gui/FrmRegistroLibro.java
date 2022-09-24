@@ -119,7 +119,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		}else if (!annio.matches(Validaciones.ANNO)) {
 			mensaje("El Año es de 4 digitos");
 		}else if (!ser.matches(Validaciones.PLACA)) {
-			mensaje("La Serie son 2 Letras y 10 Digitos");
+			mensaje("La Serie son 2 Letras y 4 Digitos");
 		}else {
 			
 			String categoria = cboCategori.getSelectedItem().toString();
