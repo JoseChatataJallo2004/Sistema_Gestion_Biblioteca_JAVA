@@ -114,7 +114,7 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 		lblGrado.setBounds(207, 334, 112, 35);
 		getContentPane().add(lblGrado);
 		
-		JComboBoxBD cboGrado = new JComboBoxBD(rb.getString("SQL_GRADO"));
+		cboGrado = new JComboBoxBD(rb.getString("SQL_GRADO"));
 		cboGrado.setBounds(327, 341, 107, 20);
 		getContentPane().add(cboGrado);
 	}

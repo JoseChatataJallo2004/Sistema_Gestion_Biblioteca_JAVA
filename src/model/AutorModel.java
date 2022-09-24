@@ -21,13 +21,14 @@ private static Logger log = Logger.getLogger(AutorModel.class.getName());
 			conn = MySqlDBConexion.getConexion();
 			
 			//2 se prepara el SQL
-			String sql = "insert into autor values(null,?,?,?,?, curtime(),null,?)";
+			String sql = "insert into autor values(null,?,?,?,?, curtime(),?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombres());
 			pstm.setString(2, obj.getApellidos());
-			//pstm.setDate(3, obj.getFechaNacimiento());
+			pstm.setDate(3, obj.getFechaNacimiento());
 			pstm.setString(4, obj.getTelefono());
-			pstm.setInt(5, obj.getGrado().getIdGrado());
+			pstm.setInt(5, obj.getEstado());
+			pstm.setInt(6, obj.getGrado().getIdGrado());
 			
 			
 			log.info(">> SQL >> " + pstm);
