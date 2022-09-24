@@ -25,7 +25,7 @@ private static Logger log = Logger.getLogger(AutorModel.class.getName());
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, obj.getNombres());
 			pstm.setString(2, obj.getApellidos());
-			//pstm.setDate(3, obj.getFechaNacimiento());
+			pstm.setDate(3, obj.getFechaNacimiento());
 			pstm.setString(4, obj.getTelefono());
 			pstm.setInt(5, obj.getGrado().getIdGrado());
 			
