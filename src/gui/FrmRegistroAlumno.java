@@ -3,15 +3,21 @@ package gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import entidad.Alumno;
+import entidad.Pais;
+import model.AlumnoModel;
 import util.JComboBoxBD;
+import util.Validaciones;
 
 public class FrmRegistroAlumno extends JInternalFrame {
 
@@ -122,9 +128,66 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		getContentPane().add(btnLimpiar);
 	}
 	
+	public void mensaje(String ms){
+		JOptionPane.showMessageDialog(this, ms);
+	}
+	
 	protected void actionPerformedBtnGrabarJButton(ActionEvent e) {
+		String nom = txtNombres.getText();
+		String ape = txtApellidos.getText();
+		String telef = txtTelefono.getText();
+		String dni = txtDNI.getText();
+		String email = txtCorreo.getText();
+		String fecNac = txtFecNac.getText();
+		int indexPais = cboPais.getSelectedIndex();
+		
+		if(!nom.matches(Validaciones.TEXTO)) {
+			mensaje("El nombre es de 2 a 20 caracteres");
+		} else if (!ape.matches(Validaciones.TEXTO)) {
+			mensaje("El apellido es de 2 a 20 caracteres");
+		} else if (!telef.matches(Validaciones.NUMERO)) {
+			mensaje("El telefono tiene de de 0 a 1000 numeros");
+		} else if (!dni.matches(Validaciones.DNI)) {
+			mensaje("El DNI tiene 8 digitos");
+		} else if(!email.matches(Validaciones.CORREO)) {
+			mensaje("El correo presenta fallos en el dominio");
+		} else if(!fecNac.matches(Validaciones.FECHA)) {
+			mensaje("La fecha tiene como formato YYYY-MM-dd");		
+		} else if(indexPais == 0) {
+			mensaje("Seleccione un pais");
+		}else {
+			String pais = cboPais.getSelectedItem().toString();
+			String idPais = pais.split(":")[0];
+			
+			Pais objPais = new Pais();
+			objPais.setIdPais(Integer.parseInt(idPais));
+			
+			Alumno objAlu = new Alumno();
+			objAlu.setNombres(nom);
+			objAlu.setApellidos(ape);
+			objAlu.setTelefono(telef);
+			objAlu.setDni(dni);
+			objAlu.setCorreo(email);
+			objAlu.setFechaNacimiento(Date.valueOf(fecNac));
+			objAlu.setPais(objPais);
+			
+			AlumnoModel model = new AlumnoModel();			
+			int salida = model.insertarAlumno(objAlu);
+			if(salida>0) {
+				mensaje("Se insertó correctamente");
+			} else {
+				mensaje ("Error en el registro");
+			}
+		}
 		
 	}
 	protected void actionPerformedBtnLimpiarJButton(ActionEvent e) {
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtTelefono.setText("");
+		txtDNI.setText("");
+		txtCorreo.setText("");
+		txtFecNac.setText("");
+		cboPais.setSelectedIndex(0);
 	}
 }
