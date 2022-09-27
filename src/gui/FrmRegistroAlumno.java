@@ -47,7 +47,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		getContentPane().add(lblAlumno);
 		
 		JLabel lblNombres = new JLabel("Nombres:");
-		lblNombres.setBounds(56, 95, 46, 14);
+		lblNombres.setBounds(56, 95, 140, 14);
 		getContentPane().add(lblNombres);
 		
 		txtNombres = new JTextField();
@@ -56,7 +56,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtNombres.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setBounds(56, 136, 46, 14);
+		lblApellidos.setBounds(56, 136, 140, 14);
 		getContentPane().add(lblApellidos);
 		
 		txtApellidos = new JTextField();
@@ -65,7 +65,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtApellidos.setColumns(10);
 		
 		JLabel lblTelefono = new JLabel("Telefono:");
-		lblTelefono.setBounds(56, 182, 46, 14);
+		lblTelefono.setBounds(56, 182, 140, 14);
 		getContentPane().add(lblTelefono);
 		
 		txtTelefono = new JTextField();
@@ -74,7 +74,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtTelefono.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI:");
-		lblDNI.setBounds(56, 230, 46, 14);
+		lblDNI.setBounds(56, 230, 140, 14);
 		getContentPane().add(lblDNI);
 		
 		txtDNI = new JTextField();
@@ -83,7 +83,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtDNI.setColumns(10);
 		
 		JLabel lblCorreo = new JLabel("Correo:");
-		lblCorreo.setBounds(56, 279, 46, 14);
+		lblCorreo.setBounds(56, 279, 140, 14);
 		getContentPane().add(lblCorreo);
 		
 		txtCorreo = new JTextField();
@@ -92,7 +92,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtCorreo.setColumns(10);
 		
 		JLabel lblFecNac = new JLabel("Fecha de Nacimiento:");
-		lblFecNac.setBounds(56, 326, 126, 14);
+		lblFecNac.setBounds(56, 326, 140, 14);
 		getContentPane().add(lblFecNac);
 		
 		txtFecNac = new JTextField();
@@ -104,10 +104,6 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		cboPais.setToolTipText("");
 		cboPais.setBounds(228, 370, 202, 22);
 		getContentPane().add(cboPais);
-		
-		JLabel lblPais = new JLabel("Pais:");
-		lblPais.setBounds(56, 374, 46, 14);
-		getContentPane().add(lblPais);
 		
 		JButton btnGrabar = new JButton("Grabar");
 		btnGrabar.addActionListener(new ActionListener() {
@@ -126,6 +122,10 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		});
 		btnLimpiar.setBounds(315, 443, 89, 23);
 		getContentPane().add(btnLimpiar);
+		
+		JLabel lblNewLabel = new JLabel("País:");
+		lblNewLabel.setBounds(56, 374, 140, 14);
+		getContentPane().add(lblNewLabel);
 	}
 	
 	public void mensaje(String ms){
