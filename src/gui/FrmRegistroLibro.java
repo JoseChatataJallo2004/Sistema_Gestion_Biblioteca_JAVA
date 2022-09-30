@@ -45,7 +45,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(null);
 		
-		lblNewLabel = new JLabel("Titulo");
+		lblNewLabel = new JLabel("T\u00edtulo");
 		lblNewLabel.setFont(new Font("NSimSun", Font.PLAIN, 20));
 		lblNewLabel.setBounds(285, 96, 111, 28);
 		getContentPane().add(lblNewLabel);
@@ -82,7 +82,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		textSerie.setBounds(464, 248, 254, 43);
 		getContentPane().add(textSerie);
 		
-		lblNewLabel_3 = new JLabel("Categoria");
+		lblNewLabel_3 = new JLabel("Categor\u00eda");
 		lblNewLabel_3.setFont(new Font("NSimSun", Font.PLAIN, 20));
 		lblNewLabel_3.setBounds(285, 346, 128, 33);
 		getContentPane().add(lblNewLabel_3);
@@ -115,11 +115,13 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		String ser=textSerie.getText();
 		int  Indecate=cboCategori.getSelectedIndex();
 		if (!ti.matches(Validaciones.TEXTO)) {
-			mensaje("El Titulo  es de 2 a 30 caracteres");
+			mensaje("El T\u00edtulo  es de 2 a 30 caracteres");
 		}else if (!annio.matches(Validaciones.ANNO)) {
-			mensaje("El Año es de 4 digitos");
+			mensaje("El Año es de 4 d\u00edgitos");
 		}else if (!ser.matches(Validaciones.PLACA)) {
-			mensaje("La Serie son 2 Letras y 4 Digitos");
+			mensaje("La Serie son 2 Letras May\u00fasculas y 4 D\u00edgitos");
+		}else if((Indecate ==0)) {
+			mensaje("Seleccione una Categor\u00eda");
 		}else {
 			
 			String categoria = cboCategori.getSelectedItem().toString();
