@@ -37,6 +37,7 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 	private JComboBoxBD cboGrado;
 	private ResourceBundle rb = ResourceBundle.getBundle("combo");
 	private JButton btnRegistrar;
+	private JButton btnLimpiar;
 
 	public FrmRegistroAutor() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -103,7 +104,8 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 		btnRegistrar.setBounds(403, 393, 106, 40);
 		getContentPane().add(btnRegistrar);
 		
-		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.addActionListener(this);
 		btnLimpiar.setFont(new Font("Sitka Text", Font.BOLD, 14));
 		btnLimpiar.setBounds(212, 393, 106, 40);
 		getContentPane().add(btnLimpiar);
@@ -124,6 +126,9 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnLimpiar) {
+			actionPerformedBtnLimpiarJButton(e);
+		}
 		if (e.getSource() == btnRegistrar) {
 			actionPerformedBtnRegistrarJButton(e);
 		}
@@ -166,8 +171,13 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 			} else {
 				mensaje ("Error en el registro");
 			}
-			
-			
 		}
+	}
+	protected void actionPerformedBtnLimpiarJButton(ActionEvent e) {
+		txtNombre.setText("");
+		txtApellido.setText("");
+		txtFechaN.setText("");
+		txtTelefono.setText("");
+		cboGrado.setSelectedIndex(0);	
 	}
 }
