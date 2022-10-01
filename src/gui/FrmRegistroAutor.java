@@ -1,15 +1,17 @@
 package gui;
 
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.ResourceBundle;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import entidad.Autor;
@@ -17,14 +19,6 @@ import entidad.Grado;
 import model.AutorModel;
 import util.JComboBoxBD;
 import util.Validaciones;
-
-import java.awt.Color;
-import java.awt.Rectangle;
-import java.util.ResourceBundle;
-import javax.swing.JComboBox;
-import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.awt.event.ActionEvent;
 
 public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 
@@ -87,7 +81,7 @@ public class FrmRegistroAutor extends JInternalFrame implements ActionListener {
 		txtFechaN.setBounds(355, 250, 107, 20);
 		getContentPane().add(txtFechaN);
 		
-		JLabel lblTelefono = new JLabel("Teléfono  :");
+		JLabel lblTelefono = new JLabel("Tel\u00e9fono  :");
 		lblTelefono.setHorizontalAlignment(SwingConstants.LEFT);
 		lblTelefono.setFont(new Font("Tempus Sans ITC", Font.BOLD, 15));
 		lblTelefono.setBounds(207, 288, 112, 35);

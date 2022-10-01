@@ -29,7 +29,7 @@ public class LibroModel {
 			pstm.setString(3, obj.getSerie());
 			pstm.setInt(4,obj.getEstado());
 			pstm.setInt(5,obj.getCategoria().getIdCategoria());
-			System.out.println(pstm);
+			log.info("SQL >>" + pstm);
 
 		
 			salida = pstm.executeUpdate();

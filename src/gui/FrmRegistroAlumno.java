@@ -123,7 +123,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		btnLimpiar.setBounds(315, 443, 89, 23);
 		getContentPane().add(btnLimpiar);
 		
-		JLabel lblNewLabel = new JLabel("País:");
+		JLabel lblNewLabel = new JLabel("Pa\u00eds:");
 		lblNewLabel.setBounds(56, 374, 140, 14);
 		getContentPane().add(lblNewLabel);
 	}
@@ -174,7 +174,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 			AlumnoModel model = new AlumnoModel();			
 			int salida = model.insertarAlumno(objAlu);
 			if(salida>0) {
-				mensaje("Se insertó correctamente");
+				mensaje("Se insert\u00f3 correctamente");
 			} else {
 				mensaje ("Error en el registro");
 			}

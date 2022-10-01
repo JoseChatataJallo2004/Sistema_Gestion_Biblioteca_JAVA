@@ -50,7 +50,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		lblNewLabel.setBounds(285, 96, 111, 28);
 		getContentPane().add(lblNewLabel);
 		
-		lblNewLabel_1 = new JLabel("Año");
+		lblNewLabel_1 = new JLabel("A\u00f1o");
 		lblNewLabel_1.setFont(new Font("NSimSun", Font.PLAIN, 20));
 		lblNewLabel_1.setBounds(285, 173, 111, 28);
 		getContentPane().add(lblNewLabel_1);

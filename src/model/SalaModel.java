@@ -2,11 +2,10 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.logging.Logger;
 
 import entidad.Sala;
 import util.MySqlDBConexion;
-import java.sql.PreparedStatement;
-import java.util.logging.Logger;
 
 public class SalaModel {
 	
@@ -30,7 +29,7 @@ public class SalaModel {
 			pstm.setInt(5,obj.getEstado());
 			pstm.setInt(6, obj.getSede().getIdSede());
 			
-			System.out.println(pstm);
+			log.info("SQL >>" + pstm);
 			
 			//3 se ejecuta en la BD
 			salida = pstm.executeUpdate();

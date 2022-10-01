@@ -1,28 +1,23 @@
 package gui;
 
-import javax.swing.JFrame;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import entidad.Grado;
 import entidad.Sala;
 import entidad.Sede;
 import model.SalaModel;
 import util.JComboBoxBD;
 import util.Validaciones;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.rmi.server.ObjID;
-import java.util.ResourceBundle;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 
 public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 
@@ -51,7 +46,7 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		lblNewLabel.setBounds(101, 22, 702, 45);
 		getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Número:");
+		JLabel lblNewLabel_1 = new JLabel("N\u00famero:");
 		lblNewLabel_1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 18));
 		lblNewLabel_1.setBounds(142, 121, 109, 45);
 		getContentPane().add(lblNewLabel_1);
@@ -61,7 +56,7 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		lblNewLabel_1_1.setBounds(142, 200, 109, 45);
 		getContentPane().add(lblNewLabel_1_1);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Núm.Alumnos:");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Num.Alumnos:");
 		lblNewLabel_1_1_1.setFont(new Font("Tempus Sans ITC", Font.BOLD, 18));
 		lblNewLabel_1_1_1.setBounds(533, 121, 170, 45);
 		getContentPane().add(lblNewLabel_1_1_1);
