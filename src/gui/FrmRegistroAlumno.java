@@ -3,15 +3,21 @@ package gui;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import entidad.Alumno;
+import entidad.Pais;
+import model.AlumnoModel;
 import util.JComboBoxBD;
+import util.Validaciones;
 
 public class FrmRegistroAlumno extends JInternalFrame {
 
@@ -41,7 +47,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		getContentPane().add(lblAlumno);
 		
 		JLabel lblNombres = new JLabel("Nombres:");
-		lblNombres.setBounds(56, 95, 46, 14);
+		lblNombres.setBounds(56, 95, 140, 14);
 		getContentPane().add(lblNombres);
 		
 		txtNombres = new JTextField();
@@ -50,7 +56,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtNombres.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos:");
-		lblApellidos.setBounds(56, 136, 46, 14);
+		lblApellidos.setBounds(56, 136, 140, 14);
 		getContentPane().add(lblApellidos);
 		
 		txtApellidos = new JTextField();
@@ -59,7 +65,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtApellidos.setColumns(10);
 		
 		JLabel lblTelefono = new JLabel("Telefono:");
-		lblTelefono.setBounds(56, 182, 46, 14);
+		lblTelefono.setBounds(56, 182, 140, 14);
 		getContentPane().add(lblTelefono);
 		
 		txtTelefono = new JTextField();
@@ -68,7 +74,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtTelefono.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI:");
-		lblDNI.setBounds(56, 230, 46, 14);
+		lblDNI.setBounds(56, 230, 140, 14);
 		getContentPane().add(lblDNI);
 		
 		txtDNI = new JTextField();
@@ -77,7 +83,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtDNI.setColumns(10);
 		
 		JLabel lblCorreo = new JLabel("Correo:");
-		lblCorreo.setBounds(56, 279, 46, 14);
+		lblCorreo.setBounds(56, 279, 140, 14);
 		getContentPane().add(lblCorreo);
 		
 		txtCorreo = new JTextField();
@@ -86,7 +92,7 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		txtCorreo.setColumns(10);
 		
 		JLabel lblFecNac = new JLabel("Fecha de Nacimiento:");
-		lblFecNac.setBounds(56, 326, 126, 14);
+		lblFecNac.setBounds(56, 326, 140, 14);
 		getContentPane().add(lblFecNac);
 		
 		txtFecNac = new JTextField();
@@ -98,10 +104,6 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		cboPais.setToolTipText("");
 		cboPais.setBounds(228, 370, 202, 22);
 		getContentPane().add(cboPais);
-		
-		JLabel lblPais = new JLabel("Pais:");
-		lblPais.setBounds(56, 374, 46, 14);
-		getContentPane().add(lblPais);
 		
 		JButton btnGrabar = new JButton("Grabar");
 		btnGrabar.addActionListener(new ActionListener() {
@@ -120,11 +122,72 @@ public class FrmRegistroAlumno extends JInternalFrame {
 		});
 		btnLimpiar.setBounds(315, 443, 89, 23);
 		getContentPane().add(btnLimpiar);
+		
+		JLabel lblNewLabel = new JLabel("País:");
+		lblNewLabel.setBounds(56, 374, 140, 14);
+		getContentPane().add(lblNewLabel);
+	}
+	
+	public void mensaje(String ms){
+		JOptionPane.showMessageDialog(this, ms);
 	}
 	
 	protected void actionPerformedBtnGrabarJButton(ActionEvent e) {
+		String nom = txtNombres.getText();
+		String ape = txtApellidos.getText();
+		String telef = txtTelefono.getText();
+		String dni = txtDNI.getText();
+		String email = txtCorreo.getText();
+		String fecNac = txtFecNac.getText();
+		int indexPais = cboPais.getSelectedIndex();
+		
+		if(!nom.matches(Validaciones.TEXTO)) {
+			mensaje("El nombre es de 2 a 20 caracteres");
+		} else if (!ape.matches(Validaciones.TEXTO)) {
+			mensaje("El apellido es de 2 a 20 caracteres");
+		} else if (!telef.matches(Validaciones.NUMERO)) {
+			mensaje("El telefono tiene de de 0 a 1000 numeros");
+		} else if (!dni.matches(Validaciones.DNI)) {
+			mensaje("El DNI tiene 8 digitos");
+		} else if(!email.matches(Validaciones.CORREO)) {
+			mensaje("El correo presenta fallos en el dominio");
+		} else if(!fecNac.matches(Validaciones.FECHA)) {
+			mensaje("La fecha tiene como formato YYYY-MM-dd");		
+		} else if(indexPais == 0) {
+			mensaje("Seleccione un pais");
+		}else {
+			String pais = cboPais.getSelectedItem().toString();
+			String idPais = pais.split(":")[0];
+			
+			Pais objPais = new Pais();
+			objPais.setIdPais(Integer.parseInt(idPais));
+			
+			Alumno objAlu = new Alumno();
+			objAlu.setNombres(nom);
+			objAlu.setApellidos(ape);
+			objAlu.setTelefono(telef);
+			objAlu.setDni(dni);
+			objAlu.setCorreo(email);
+			objAlu.setFechaNacimiento(Date.valueOf(fecNac));
+			objAlu.setPais(objPais);
+			
+			AlumnoModel model = new AlumnoModel();			
+			int salida = model.insertarAlumno(objAlu);
+			if(salida>0) {
+				mensaje("Se insertó correctamente");
+			} else {
+				mensaje ("Error en el registro");
+			}
+		}
 		
 	}
 	protected void actionPerformedBtnLimpiarJButton(ActionEvent e) {
+		txtNombres.setText("");
+		txtApellidos.setText("");
+		txtTelefono.setText("");
+		txtDNI.setText("");
+		txtCorreo.setText("");
+		txtFecNac.setText("");
+		cboPais.setSelectedIndex(0);
 	}
 }

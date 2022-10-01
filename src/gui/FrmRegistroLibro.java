@@ -5,14 +5,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import entidad.Categoria;
+import entidad.Libro;
+import model.LibroModel;
+import util.JComboBoxBD;
+import util.Validaciones;
 
 public class FrmRegistroLibro extends JInternalFrame implements ActionListener, KeyListener {
 
@@ -25,12 +31,11 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 	 JTextField textanhio;
 	 JTextField textSerie;
 	  JLabel lblNewLabel_3;
-	  JTextField textCategoria;
 	   JButton btnLimpiar;
-	   JButton btnVer;
-	   private JComboBox cboCategori;
+	   private JComboBoxBD cboCategori;
 	   private JLabel lblNewLabel_4;
-
+	   
+	   private ResourceBundle rb=ResourceBundle.getBundle("combo");
 	public FrmRegistroLibro() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setMaximizable(true);
@@ -40,7 +45,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		setBounds(100, 100, 900, 600);
 		getContentPane().setLayout(null);
 		
-		lblNewLabel = new JLabel("Titulo");
+		lblNewLabel = new JLabel("T\u00edtulo");
 		lblNewLabel.setFont(new Font("NSimSun", Font.PLAIN, 20));
 		lblNewLabel.setBounds(285, 96, 111, 28);
 		getContentPane().add(lblNewLabel);
@@ -77,29 +82,18 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		textSerie.setBounds(464, 248, 254, 43);
 		getContentPane().add(textSerie);
 		
-		lblNewLabel_3 = new JLabel("Categoria");
+		lblNewLabel_3 = new JLabel("Categor\u00eda");
 		lblNewLabel_3.setFont(new Font("NSimSun", Font.PLAIN, 20));
 		lblNewLabel_3.setBounds(285, 346, 128, 33);
 		getContentPane().add(lblNewLabel_3);
-		
-		textCategoria = new JTextField();
-		textCategoria.addKeyListener(this);
-		textCategoria.setBounds(464, 336, 254, 43);
-		getContentPane().add(textCategoria);
-		textCategoria.setColumns(10);
 		
 		btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.addActionListener(this);
 		btnLimpiar.setBounds(345, 492, 242, 33);
 		getContentPane().add(btnLimpiar);
 		
-		btnVer = new JButton("Ver");
-		btnVer.addActionListener(this);
-		btnVer.setBounds(735, 346, 89, 23);
-		getContentPane().add(btnVer);
-		
-		cboCategori = new JComboBox();
-		cboCategori.setBounds(464, 389, 254, 22);
+		cboCategori = new JComboBoxBD(rb.getString("SQL_CATEGORIA"));
+		cboCategori.setBounds(464, 346, 254, 43);
 		getContentPane().add(cboCategori);
 		
 		lblNewLabel_4 = new JLabel("Registro Libro");
@@ -108,9 +102,6 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		getContentPane().add(lblNewLabel_4);
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnVer) {
-			actionPerformedBtnVerJButton(e);
-		}
 		if (e.getSource() == btnLimpiar) {
 			actionPerformedBtnLimpiarJButton(e);
 		}
@@ -119,26 +110,35 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		}
 	}
 	protected void actionPerformedBtnNewButtonJButton(ActionEvent e) {
-		/*String ti=texttitulo.getText();
+		String ti=texttitulo.getText();
 		String annio=textanhio.getText();
 		String ser=textSerie.getText();
-		String cate=textCategoria.getText();
+		int  Indecate=cboCategori.getSelectedIndex();
 		if (!ti.matches(Validaciones.TEXTO)) {
-			mensaje("El Titulo  es de 2 a 30 caracteres");
+			mensaje("El T\u00edtulo  es de 2 a 30 caracteres");
 		}else if (!annio.matches(Validaciones.ANNO)) {
-			mensaje("El Año es de 4 digitos");
-		}else if (!ser.matches(Validaciones.Serie_libro)) {
-			mensaje("La Serie son 2 Letras y 10 Digitos");
-		
-		}else if (!cate.matches(Validaciones.categoria)) {
-			mensaje("La Categoria  debe ser 1=NOVELA , 2=CUENTO , 3=POESIA o 4=Enciclopedia");
+			mensaje("El Año es de 4 d\u00edgitos");
+		}else if (!ser.matches(Validaciones.PLACA)) {
+			mensaje("La Serie son 2 Letras May\u00fasculas y 4 D\u00edgitos");
+		}else if((Indecate ==0)) {
+			mensaje("Seleccione una Categor\u00eda");
 		}else {
-			Registro_Libro obj = new Registro_Libro();
+			
+			String categoria = cboCategori.getSelectedItem().toString();
+
+			String idCategoria = categoria.split(":")[0];
+			
+
+			Categoria objcategoria = new Categoria();
+
+			objcategoria.setIdCategoria(Integer.parseInt(idCategoria));
+		
+			Libro obj = new Libro();
 			obj.setTitulo(ti);
 			obj.setAnnio(Integer.parseInt(annio));
 			obj.setSerie(ser);
 			obj.setEstado(1);
-			obj.setCategoria(Integer.parseInt(cate));
+			obj.setCategoria(objcategoria);
 			
 			LibroModel model = new LibroModel();
 			int salida = model.registroLibro(obj);
@@ -148,7 +148,7 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 				mensaje("Error en el registro");
 			}
 			
-		}*/
+		}
 	}
 		public void mensaje(String ms){
 			JOptionPane.showMessageDialog(this, ms);
@@ -158,9 +158,6 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 	public void keyReleased(KeyEvent e) {
 	}
 	public void keyTyped(KeyEvent e) {
-		if (e.getSource() == textCategoria) {
-			keyTypedTextCategoriaJTextField(e);
-		}
 		
 		if (e.getSource() == textanhio) {
 			keyTypedTextanhioJTextField(e);
@@ -181,28 +178,9 @@ public class FrmRegistroLibro extends JInternalFrame implements ActionListener, 
 		textanhio.setText("");
 		texttitulo.setText("");
 		textSerie.setText("");
-		textCategoria.setText("");
+		cboCategori.setSelectedIndex(0);
 		texttitulo.requestFocus();
 		
 		
-	}
-	
-	protected void keyTypedTextCategoriaJTextField(KeyEvent e) {
-		if (!Character.isDigit(e.getKeyChar())) {
-			e.consume();
-		}
-		
-		String textoQueVaGenerarse = textCategoria.getText().trim() + e.getKeyChar();
-		if (textoQueVaGenerarse.length()>1) {
-			e.consume();
-		}
-	}
-	protected void actionPerformedBtnVerJButton(ActionEvent e) {
-		mensaje(" Categorias " + "\n"
-				+ "1: Novela " + "\n"
-				+ "2: Cuento" + "\n"
-				+ "3: Poesía " + "\n"
-				+ "4: Enciclopedia "		
-				);
 	}
 }

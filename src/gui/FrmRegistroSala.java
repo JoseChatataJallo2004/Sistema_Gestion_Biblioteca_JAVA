@@ -133,11 +133,11 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		int indexSede = cboSede.getSelectedIndex();
 		
 		if(!num.matches(Validaciones.TEXTO_NUMERO)) {
-			mensaje("El numero es 1 letra y 3 digitos");
+			mensaje("El n\u00famero es 1 letra y 3 digitos");
 		}else if(!pis.matches(Validaciones.NUMERO)) {
-			mensaje("El piso es solo digitos");
+			mensaje("El piso es 0 a 1000 digitos");
 		}else if(!nalum.matches(Validaciones.NUMERO)) {
-			mensaje("El número de alumnos es solo digitos");
+			mensaje("El n\u00famero es 0 a 1000 digitos");
 		}else if(!rec.matches(Validaciones.TEXTO)) {
 			mensaje("El recurso es 2 a 20 caracteres");
 		}else if((indexSede ==0)) {
@@ -152,9 +152,9 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 			
 			Sala obj = new Sala();
 			obj.setNumero(num);
-			obj.setRecursos(rec);
 			obj.setPiso(Integer.parseInt(pis));
 			obj.setNumAlumnos(Integer.parseInt(nalum));
+			obj.setRecursos(rec);
 			obj.setSede(objSede);
 			obj.setEstado(1);
 			
@@ -174,6 +174,7 @@ public class FrmRegistroSala extends JInternalFrame implements ActionListener {
 		txtNumAlum.setText("");
 		txtPiso.setText("");
 		txtRecursos.setText("");
+		cboSede.setSelectedIndex(0);
 		txtNumero.requestFocus();	
 	}
 }
