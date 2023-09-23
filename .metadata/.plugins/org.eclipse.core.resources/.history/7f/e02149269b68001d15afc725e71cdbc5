@@ -1,0 +1,398 @@
+package gui;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import entidad.Libro;
+import entidad.Pais;
+import entidad.Proveedor;
+import model.LibroModel;
+import model.ProveedorModel;
+import util.JComboBoxBD;
+import util.Validaciones;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class FrmCrudProveedor extends JInternalFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JLabel lblMantenimientoProveedor;
+	private JLabel lblNombre;
+	private JTextField textNombre;
+	private JLabel lblNewLabel;
+	private JTextField textApellidos;
+	private JLabel lblDni;
+	private JTextField textDni;
+	private JLabel lblDireccion;
+	private JTextField textDireccion;
+	private JLabel lblTelefono;
+	private JTextField textTelefono;
+	private JLabel lblCorreo;
+	private JTextField textCorreo;
+	private JLabel lblNewLabel_1;
+	private JCheckBox chkEstado;
+	private JLabel lblNewLabel_2;
+	private JComboBoxBD cboPais;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JButton btnIngresar;
+	private JButton btnEliminar;
+	private JButton btnActualizar;
+	// -1 indica que no se ha selecionado nada en la grilla o Jtable
+			int idSeleccionado = -1;
+		
+		private ResourceBundle rb = ResourceBundle.getBundle("combo");
+	public FrmCrudProveedor() {
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
+		setTitle("Mantenimiento de Proveedor");
+		setBounds(100, 100, 900, 600);
+		getContentPane().setLayout(null);
+		
+		lblMantenimientoProveedor = new JLabel("Mantenimiento Proveedor");
+		lblMantenimientoProveedor.setOpaque(true);
+		lblMantenimientoProveedor.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMantenimientoProveedor.setForeground(Color.WHITE);
+		lblMantenimientoProveedor.setFont(new Font("Tahoma", Font.BOLD, 19));
+		lblMantenimientoProveedor.setBackground(Color.ORANGE);
+		lblMantenimientoProveedor.setBounds(89, 21, 744, 59);
+		getContentPane().add(lblMantenimientoProveedor);
+		
+		lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(89, 107, 118, 14);
+		getContentPane().add(lblNombre);
+		
+		textNombre = new JTextField();
+		textNombre.setColumns(10);
+		textNombre.setBounds(193, 104, 324, 20);
+		getContentPane().add(textNombre);
+		
+		lblNewLabel = new JLabel("Apellido");
+		lblNewLabel.setBounds(89, 144, 78, 14);
+		getContentPane().add(lblNewLabel);
+		
+		textApellidos = new JTextField();
+		textApellidos.setColumns(10);
+		textApellidos.setBounds(193, 141, 324, 20);
+		getContentPane().add(textApellidos);
+		
+		lblDni = new JLabel("Dni");
+		lblDni.setBounds(89, 182, 78, 14);
+		getContentPane().add(lblDni);
+		
+		textDni = new JTextField();
+		textDni.setColumns(10);
+		textDni.setBounds(193, 179, 324, 20);
+		getContentPane().add(textDni);
+		
+		lblDireccion = new JLabel("Direccion");
+		lblDireccion.setBounds(89, 219, 78, 14);
+		getContentPane().add(lblDireccion);
+		
+		textDireccion = new JTextField();
+		textDireccion.setColumns(10);
+		textDireccion.setBounds(193, 216, 324, 20);
+		getContentPane().add(textDireccion);
+		
+		lblTelefono = new JLabel("Telefono");
+		lblTelefono.setBounds(89, 254, 78, 14);
+		getContentPane().add(lblTelefono);
+		
+		textTelefono = new JTextField();
+		textTelefono.setColumns(10);
+		textTelefono.setBounds(193, 247, 324, 20);
+		getContentPane().add(textTelefono);
+		
+		lblCorreo = new JLabel("Correo");
+		lblCorreo.setBounds(89, 291, 78, 14);
+		getContentPane().add(lblCorreo);
+		
+		textCorreo = new JTextField();
+		textCorreo.setColumns(10);
+		textCorreo.setBounds(193, 285, 324, 20);
+		getContentPane().add(textCorreo);
+		
+		lblNewLabel_1 = new JLabel("Estado");
+		lblNewLabel_1.setBounds(89, 328, 108, 14);
+		getContentPane().add(lblNewLabel_1);
+		
+		chkEstado = new JCheckBox("Activo");
+		chkEstado.setSelected(true);
+		chkEstado.setBounds(193, 324, 97, 23);
+		getContentPane().add(chkEstado);
+		
+		lblNewLabel_2 = new JLabel("Pais");
+		lblNewLabel_2.setBounds(89, 370, 108, 14);
+		getContentPane().add(lblNewLabel_2);
+		
+		cboPais = new JComboBoxBD(rb.getString("SQL_PAIS"));
+		cboPais.setBounds(193, 366, 324, 22);
+		getContentPane().add(cboPais);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 402, 864, 157);
+		getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseClickedTable(e);
+			}
+		});
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Codigo", "Nombres", "Apellidos", "Dni", "Direccion", "Telefono", "Correo", "Estado", "idPais", "Pais"
+			}
+		));
+		scrollPane.setViewportView(table);
+		
+		btnIngresar = new JButton("Ingresar");
+		btnIngresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedBtnIngresar(e);
+			}
+		});
+		btnIngresar.setBounds(678, 103, 155, 23);
+		getContentPane().add(btnIngresar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedBtnEliminar(e);
+			}
+		});
+		btnEliminar.setBounds(678, 151, 155, 23);
+		getContentPane().add(btnEliminar);
+		
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedBtnActualizar(e);
+			}
+		});
+		btnActualizar.setBounds(678, 197, 155, 23);
+		getContentPane().add(btnActualizar);
+		lista();
+	}
+	protected void actionPerformedBtnIngresar(ActionEvent e) {
+		registrar();
+	}
+	protected void actionPerformedBtnEliminar(ActionEvent e) {
+		elimina();
+	}
+	protected void actionPerformedBtnActualizar(ActionEvent e) {
+		actualizar();
+	}
+	void limpiarCajasTexto() {
+		textApellidos.setText("");
+		textCorreo.setText("");
+		textDireccion.setText("");
+		textNombre.setText("");
+		textTelefono.setText("");
+		textDni.setText("");
+		cboPais.setSelectedIndex(0);
+		chkEstado.setSelected(true);
+		textNombre.requestFocus();
+	}
+	
+	public void mensaje(String ms){
+		JOptionPane.showMessageDialog(this, ms);
+	} 
+	private void lista() {
+		DefaultTableModel dtm=(DefaultTableModel) table.getModel();
+		dtm.setRowCount(0);
+		ProveedorModel l=new ProveedorModel();
+		List<Proveedor> lista=l.listaTodos();
+		for(Proveedor x:lista) {
+			Object[] fila= {x.getIdProveedor(),x.getNombre(),x.getApellido(),x.getDni(),x.getDireccion(),x.getTelefono(),x.getCorreo(),getStrEstado(x.getEstado()) ,x.getPais().getIdPais(),x.getPais().getNombre()
+		};
+			dtm.addRow(fila);
+	}
+	}
+	public String getStrEstado(int estado) {
+		if (estado == 1) return "Activo";
+		else			 return "Inactivo";
+	}
+	private void elimina() {
+		if (idSeleccionado == -1) {
+			mensaje("Seleccione una fila");
+		}else {
+			ProveedorModel model = new ProveedorModel();
+			int salida = model.eliminarProveedor(idSeleccionado);
+			if (salida > 0) {
+				lista();
+				limpiarCajasTexto();
+				idSeleccionado = -1;
+				mensaje("Se eliminó correctamente");
+			}else {
+				mensaje("Error en la eliminación");
+			}
+		}
+	}
+	//==============================================================
+	private void busca() {
+		//get obetner , select es seleccionar la fina 
+		int fila=table.getSelectedRow();
+		//getvalues al obtiene el valor de las celdas 
+		idSeleccionado=(Integer)table.getValueAt(fila, 0);
+		String nombre=(String )table.getValueAt(fila, 1);
+		String apellido=(String )table.getValueAt(fila, 2);
+		String dni=(String )table.getValueAt(fila, 3);
+		String direccion=(String )table.getValueAt(fila, 4);
+		String telefono=(String )table.getValueAt(fila, 5);
+		String correo=(String )table.getValueAt(fila, 6);
+		String estado=(String )table.getValueAt(fila, 7);
+		int idPais =(Integer)table.getValueAt(fila, 8);
+		String pais=(String )table.getValueAt(fila, 9);
+		
+		textNombre.setText(nombre);
+		textApellidos.setText(apellido);
+		textDni.setText(dni);
+		textDireccion.setText(direccion);
+		textTelefono.setText(telefono);
+		textCorreo.setText(correo);
+		
+		cboPais.setSelectedItem(idPais + ": " + pais);
+		chkEstado.setSelected(estado.equals("Activo")?true:false);
+	}
+	
+	private void registrar() {
+		String nombre=textNombre.getText();
+		String apellido=textApellidos.getText();
+		String dni=textDni.getText();
+		String direccion=textDireccion.getText();
+		String telefono=textTelefono.getText();
+		String correo=textCorreo.getText();
+		int  Indecate=cboPais.getSelectedIndex();
+		if (!nombre.matches(Validaciones.TEXTO)) {
+			mensaje("El Nombre es de 2 a 30 caracteres");
+		}else if (!apellido.matches(Validaciones.TEXTO)) {
+			mensaje("El Apellido es de 2 a 30 caracteres");
+		}else if (!dni.matches(Validaciones.DNI)) {
+			mensaje("EL DNI es de 8 Digitos");
+		}else if (!direccion.matches(Validaciones.TEXTO_NUMERO)) {
+			mensaje("Tu Direccion  es de 2 a 30 caracteres ");
+		}else if (!telefono.matches(Validaciones.NUMERO)) {
+			mensaje("El telefono es de 9 digitos");
+		}else if (!correo.matches(Validaciones.TEXTO)) {
+			mensaje("Tu Correo debe ser con @gmail.com");
+		}else if((Indecate ==0)) {
+			mensaje("Seleccione un  Pais");
+		}else {
+			
+			String pais = cboPais.getSelectedItem().toString();
+
+			String idPais = pais.split(":")[0];
+			
+
+			Pais objPais = new Pais();
+
+			objPais.setIdPais(Integer.parseInt(idPais));
+			Proveedor obj = new Proveedor();
+			obj.setNombre(nombre);
+			obj.setApellido(apellido);
+			obj.setDni(dni);
+			obj.setDireccion(direccion);
+			obj.setTelefono(telefono);
+			obj.setCorreo(correo);
+			obj.setEstado(chkEstado.isSelected()?1:0);
+			obj.setPais(objPais);
+			
+			
+			
+			ProveedorModel model = new ProveedorModel();
+			int salida = model.registroProveedor(obj);
+			if (salida>0) {
+				lista();
+				mensaje("Registro exitoso");	
+				limpiarCajasTexto();
+			}else {
+				mensaje("Error en el registro");
+			}
+		}
+	}
+	protected void mouseClickedTable(MouseEvent e) {
+		busca();
+	}
+	private void actualizar() {
+		String nombre=textNombre.getText();
+		String apellido=textApellidos.getText();
+		String dni=textDni.getText();
+		String direccion=textDireccion.getText();
+		String telefono=textTelefono.getText();
+		String correo=textCorreo.getText();
+		int  Indecate=cboPais.getSelectedIndex();
+		if (!nombre.matches(Validaciones.TEXTO)) {
+			mensaje("El Nombre es de 2 a 30 caracteres");
+		}else if (!apellido.matches(Validaciones.TEXTO)) {
+			mensaje("El Apellido es de 2 a 30 caracteres");
+		}else if (!dni.matches(Validaciones.DNI)) {
+			mensaje("EL DNI es de 8 Digitos");
+		}else if (!direccion.matches(Validaciones.TEXTO_NUMERO)) {
+			mensaje("Tu Direccion  es de 2 a 30 caracteres ");
+		}else if (!telefono.matches(Validaciones.NUMERO)) {
+			mensaje("El telefono es de 9 digitos");
+		}else if (!correo.matches(Validaciones.CORREO)) {
+			mensaje("Tu Correo debe ser con @gmail.com");
+		}else if((Indecate ==0)) {
+			mensaje("Seleccione un  Pais");
+		}else {
+			
+			String pais = cboPais.getSelectedItem().toString();
+
+			String idPais = pais.split(":")[0];
+			
+
+			Pais objPais = new Pais();
+
+			objPais.setIdPais(Integer.parseInt(idPais));
+			Proveedor obj = new Proveedor();
+			obj.setIdProveedor(idSeleccionado);
+			obj.setNombre(nombre);
+			obj.setApellido(apellido);
+			obj.setDni(dni);
+			obj.setDireccion(direccion);
+			obj.setTelefono(telefono);
+			obj.setCorreo(correo);
+			obj.setEstado(chkEstado.isSelected()?1:0);
+			obj.setPais(objPais);
+			
+			
+			
+			ProveedorModel model = new ProveedorModel();
+			int salida = model.actualizaProveedor(obj);
+			if (salida>0) {
+				lista();
+				idSeleccionado=-1;
+				
+				mensaje("Se Actualizo Correctamento");	
+				limpiarCajasTexto();
+			}else {
+				mensaje("Error en el registro");
+			}
+		}
+	}
+}

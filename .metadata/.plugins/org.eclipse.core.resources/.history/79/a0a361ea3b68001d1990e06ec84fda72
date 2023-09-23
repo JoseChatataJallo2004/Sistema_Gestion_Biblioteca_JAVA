@@ -1,0 +1,90 @@
+package gui;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import entidad.Tesis;
+import model.TesisModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.swing.JRViewer;
+import util.GeneradorReporte;
+
+public class FrmReporteTesis extends JInternalFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JTextField textTema;
+
+	public FrmReporteTesis() {
+		getContentPane().setForeground(SystemColor.activeCaption);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
+		setTitle("Reporte de Tesis");
+		setBounds(100, 100, 1200, 600);
+		getContentPane().setLayout(null);
+		
+		JLabel lblReporteDeTesis = new JLabel("Reporte de Tesis");
+		lblReporteDeTesis.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReporteDeTesis.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblReporteDeTesis.setBounds(10, 21, 1161, 36);
+		getContentPane().add(lblReporteDeTesis);
+		
+		JLabel lblTema = new JLabel("Tema");
+		lblTema.setBounds(144, 86, 93, 14);
+		getContentPane().add(lblTema);
+		
+		textTema = new JTextField();
+		textTema.setColumns(10);
+		textTema.setBounds(251, 83, 458, 20);
+		getContentPane().add(textTema);
+		
+		JButton btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionPerformedBtnFiltrar(e);
+			}
+		});
+		btnFiltrar.setBounds(751, 82, 166, 23);
+		getContentPane().add(btnFiltrar);
+		
+		JPanel panelReporte = new JPanel();
+		panelReporte.setBorder(new TitledBorder(null, "Reportes", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+		panelReporte.setBounds(10, 127, 1144, 420);
+		getContentPane().add(panelReporte);
+		panelReporte.setLayout(new BorderLayout());
+
+	}
+	protected void actionPerformedBtnFiltrar(ActionEvent e) {
+		String tem  = textTema.getText().trim();
+		
+		String dtTem = String.valueOf(tem);
+		
+		
+		TesisModel model = new TesisModel();
+		List<Tesis> lista = model.listaPorTema(dtTem);
+		//datos del reporte
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(lista);	
+		String jasper = "reporteTesis.jasper";				
+		JasperPrint print = GeneradorReporte.genera(jasper, dataSource, null);			
+		JRViewer jRViewer = new JRViewer(print);			
+		panelReporte.removeAll();	
+		panelReporte.add(jRViewer);		
+		panelReporte.repaint();		
+		panelReporte.revalidate();
+	}
+}

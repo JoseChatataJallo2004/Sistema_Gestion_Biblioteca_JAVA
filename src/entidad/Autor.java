@@ -1,6 +1,8 @@
 package entidad;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 
 
@@ -11,9 +13,29 @@ public class Autor {
 	private String apellidos;
 	private Date fechaNacimiento;
 	private String telefono;	
-	private Date fechaRegistro;
+	private Timestamp fechaRegistro;
 	private int estado;
 	private Grado grado;
+	
+	//Inicio get para el reporte
+	SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	public String getFormatoEstado() {
+		return estado == 1 ? "Activo": "Inactivo";
+	}
+	
+	public String getDescripcionGrado() {
+		return grado.getDescripcion();
+	}
+	
+	public String getFormatoFecNacimiento() {
+		return sdf1.format(fechaNacimiento);
+	}
+	
+	public String getFormatoFecRegistro() {
+		return sdf2.format(fechaRegistro);
+	}
 	
 	public int getIdAutor() {
 		return idAutor;
@@ -45,10 +67,10 @@ public class Autor {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public Date getFechaRegistro() {
+	public Timestamp getFechaRegistro() {
 		return fechaRegistro;
 	}
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 	public int getEstado() {
@@ -63,8 +85,6 @@ public class Autor {
 	public void setGrado(Grado grado) {
 		this.grado = grado;
 	}
-
-	
 	
 
 }

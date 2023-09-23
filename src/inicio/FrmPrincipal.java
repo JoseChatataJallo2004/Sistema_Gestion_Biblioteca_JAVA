@@ -47,6 +47,9 @@ import gui.FrmReporteSala;
 import gui.FrmReporteTesis;
 import model.UsuarioModel;
 import util.DatosGlobales;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 @SuppressWarnings("serial")
 public class FrmPrincipal extends JFrame implements WindowListener, ActionListener {
@@ -120,6 +123,7 @@ public class FrmPrincipal extends JFrame implements WindowListener, ActionListen
 
 	public FrmPrincipal(String cad, int x, int y) {
 		super(cad);
+		setTitle("EXPERIENCIAS FORMATIVAS EN SITUACIONES REALES DE TRABAJO II");
 		this.setLocation(0, 0);
 		this.setSize(636, 365);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -135,112 +139,130 @@ public class FrmPrincipal extends JFrame implements WindowListener, ActionListen
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnAdministracin = new JMenu("Registros (PC1)");
+		JMenu mnAdministracin = new JMenu("Registros ");
 		mnAdministracin.setVisible(false);
 		menuBar.add(mnAdministracin);
 
-		JMenu mnCrud = new JMenu("Crud (PC02)");
+		JMenu mnCrud = new JMenu("Crud ");
 		mnCrud.setVisible(false);
 		menuBar.add(mnCrud);
 
-		JMenu mnConsultas = new JMenu("Consulta (PC03)");
+		JMenu mnConsultas = new JMenu("Consulta ");
 		mnConsultas.setVisible(false);
 		menuBar.add(mnConsultas);
 
-		JMenu mnReporte = new JMenu("Reporte (PC03)");
+		JMenu mnReporte = new JMenu("Reporte");
 		mnReporte.setVisible(false);
 		menuBar.add(mnReporte);
 
 		// pc01
 		mntRegAlumno = new JMenuItem("Registro Alumno");
+		mntRegAlumno.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_DOWN_MASK));
 		mntRegAlumno.setVisible(false);
 		mntRegAlumno.addActionListener(this);
 		mnAdministracin.add(mntRegAlumno);
 
 		mntRegAutor = new JMenuItem("Registro Autor");
+		mntRegAutor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_DOWN_MASK));
 		mntRegAutor.setVisible(false);
 		mntRegAutor.addActionListener(this);
 		mnAdministracin.add(mntRegAutor);
 
 		mntRegLibro = new JMenuItem("Registro Libro");
+		mntRegLibro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_DOWN_MASK));
 		mntRegLibro.setVisible(false);
 		mntRegLibro.addActionListener(this);
 		mnAdministracin.add(mntRegLibro);
 
 		mntRegSala = new JMenuItem("Registro Sala");
+		mntRegSala.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_DOWN_MASK));
 		mntRegSala.setVisible(false);
 		mntRegSala.addActionListener(this);
 		mnAdministracin.add(mntRegSala);
 
 		mntRegTesis = new JMenuItem("Registro Tesis");
+		mntRegTesis.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_DOWN_MASK));
 		mntRegTesis.setVisible(false);
 		mntRegTesis.addActionListener(this);
 		mnAdministracin.add(mntRegTesis);
 
 		mntRegProveedor = new JMenuItem("Registro Proveedor");
+		mntRegProveedor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_DOWN_MASK));
 		mntRegProveedor.setVisible(false);
 		mntRegProveedor.addActionListener(this);
 		mnAdministracin.add(mntRegProveedor);		
 		
 		// pc02
 		mntCrudAlumno = new JMenuItem("Crud Alumno");
+		mntCrudAlumno.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.ALT_DOWN_MASK));
 		mntCrudAlumno.setVisible(false);
 		mntCrudAlumno.addActionListener(this);
 		mnCrud.add(mntCrudAlumno);
 
 		mntCrudAutor = new JMenuItem("Crud Autor");
+		mntCrudAutor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.ALT_DOWN_MASK));
 		mntCrudAutor.setVisible(false);
 		mntCrudAutor.addActionListener(this);
 		mnCrud.add(mntCrudAutor);
 
 		mntCrudLibro = new JMenuItem("Crud Libro");
+		mntCrudLibro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.ALT_DOWN_MASK));
 		mntCrudLibro.setVisible(false);
 		mntCrudLibro.addActionListener(this);
 		mnCrud.add(mntCrudLibro);
 
 		mntCrudSala = new JMenuItem("Crud Sala");
+		mntCrudSala.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.ALT_DOWN_MASK));
 		mntCrudSala.setVisible(false);
 		mntCrudSala.addActionListener(this);
 		mnCrud.add(mntCrudSala);
 
 		mntCrudTesis = new JMenuItem("Crud Tesis");
+		mntCrudTesis.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.ALT_DOWN_MASK));
 		mntCrudTesis.setVisible(false);
 		mntCrudTesis.addActionListener(this);
 		mnCrud.add(mntCrudTesis);
 
 
 		mntCrudProveedor = new JMenuItem("Crud Proveedor");
+		mntCrudProveedor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.ALT_DOWN_MASK));
 		mntCrudProveedor.setVisible(false);
 		mntCrudProveedor.addActionListener(this);
 		mnCrud.add(mntCrudProveedor);
 		
 		// pc03
 		mntConsultaAlumno = new JMenuItem("Consulta Alumno");
+		mntConsultaAlumno.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
 		mntConsultaAlumno.setVisible(false);
 		mntConsultaAlumno.addActionListener(this);
 		mnConsultas.add(mntConsultaAlumno);
 
 		mntConsultaAutor = new JMenuItem("Consulta Autor");
+		mntConsultaAutor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_DOWN_MASK));
 		mntConsultaAutor.setVisible(false);
 		mntConsultaAutor.addActionListener(this);
 		mnConsultas.add(mntConsultaAutor);
 
 		mntConsultaLibro = new JMenuItem("Consulta Libro");
+		mntConsultaLibro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
 		mntConsultaLibro.setVisible(false);
 		mntConsultaLibro.addActionListener(this);
 		mnConsultas.add(mntConsultaLibro);
 
 		mntConsultaSala = new JMenuItem("Consulta Sala");
+		mntConsultaSala.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_DOWN_MASK));
 		mntConsultaSala.setVisible(false);
 		mntConsultaSala.addActionListener(this);
 		mnConsultas.add(mntConsultaSala);
 
 		mntConsultaTesis = new JMenuItem("Consulta Tesis");
+		mntConsultaTesis.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
 		mntConsultaTesis.setVisible(false);
 		mntConsultaTesis.addActionListener(this);
 		mnConsultas.add(mntConsultaTesis);
 		
 		mntConsultaProveedor = new JMenuItem("Consulta Proveedor");
+		mntConsultaProveedor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
 		mntConsultaProveedor.setVisible(false);
 		mntConsultaProveedor.addActionListener(this);
 		mnConsultas.add(mntConsultaProveedor);
@@ -248,42 +270,48 @@ public class FrmPrincipal extends JFrame implements WindowListener, ActionListen
 		
 		// pc03
 		mntReporteAlumno = new JMenuItem("Reporte Alumno");
+		mntReporteAlumno.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.ALT_DOWN_MASK));
 		mntReporteAlumno.setVisible(false);
 		mntReporteAlumno.addActionListener(this);
 		mnReporte.add(mntReporteAlumno);
 
 		mntReporteAutor = new JMenuItem("Reporte Autor");
+		mntReporteAutor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.ALT_DOWN_MASK));
 		mntReporteAutor.setVisible(false);
 		mntReporteAutor.addActionListener(this);
 		mnReporte.add(mntReporteAutor);
 
 		mntReporteLibro = new JMenuItem("Reporte Libro");
+		mntReporteLibro.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.ALT_DOWN_MASK));
 		mntReporteLibro.setVisible(false);
 		mntReporteLibro.addActionListener(this);
 		mnReporte.add(mntReporteLibro);
 
 		mntReporteSala = new JMenuItem("Reporte Sala");
+		mntReporteSala.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_DOWN_MASK));
 		mntReporteSala.setVisible(false);
 		mntReporteSala.addActionListener(this);
 		mnReporte.add(mntReporteSala);
 
 		mntReporteTesis = new JMenuItem("Reporte Tesis");
+		mntReporteTesis.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_DOWN_MASK));
 		mntReporteTesis.setVisible(false);
 		mntReporteTesis.addActionListener(this);
 		mnReporte.add(mntReporteTesis);
 
 		mntReporteProveedor = new JMenuItem("Reporte Proveedor");
+		mntReporteProveedor.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.ALT_DOWN_MASK));
 		mntReporteProveedor.setVisible(false);
 		mntReporteProveedor.addActionListener(this);
 		mnReporte.add(mntReporteProveedor);
 
-		// Paso 2: Se añade los menus a la lista
+		// Paso 2: Se aï¿½ade los menus a la lista
 		listaMenus.add(mnAdministracin);
 		listaMenus.add(mnCrud);
 		listaMenus.add(mnConsultas);
 		listaMenus.add(mnReporte);
 		
-		// Paso 3: Se añade los items de menu a la lista
+		// Paso 3: Se aï¿½ade los items de menu a la lista
 		listaItemMenus.add(mntRegAlumno);
 		listaItemMenus.add(mntRegAutor);
 		listaItemMenus.add(mntRegLibro);
@@ -346,7 +374,7 @@ public class FrmPrincipal extends JFrame implements WindowListener, ActionListen
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
 
-			FrmPrincipal jf = new FrmPrincipal("Sistema de gestión de biblioteca", 900, 600);
+			FrmPrincipal jf = new FrmPrincipal("Sistema de gestiï¿½n de biblioteca", 900, 600);
 			jf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			jf.setVisible(false);
 
@@ -362,7 +390,7 @@ public class FrmPrincipal extends JFrame implements WindowListener, ActionListen
 	}
 
 	public void windowClosing(WindowEvent e) {
-		int n = JOptionPane.showConfirmDialog(e.getWindow(), "¿Desea cerrar la aplicación?", "Confirmación",
+		int n = JOptionPane.showConfirmDialog(e.getWindow(), "ï¿½Desea cerrar la aplicaciï¿½n?", "Confirmaciï¿½n",
 				JOptionPane.YES_NO_OPTION);
 		if (n == JOptionPane.YES_OPTION) {
 			System.exit(0);

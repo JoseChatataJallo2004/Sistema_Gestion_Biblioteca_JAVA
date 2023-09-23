@@ -1,6 +1,7 @@
 package entidad;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class Sala {
 	private int idSala;
@@ -8,9 +9,25 @@ public class Sala {
 	private int piso;
 	private int numAlumnos;
 	private String recursos;
-	private Date fechaRegistro;
+	private Timestamp fechaRegistro;
 	private int estado;
 	private Sede sede;
+	
+	
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+	
+	public String getFormatoRegistro() {
+		return sdf.format(fechaRegistro);
+	}
+	
+	public String getFormatoEstado() {
+		return estado==1 ? "Activo" : "Inactivo";
+	}
+	
+	public String getFormatoSede() {
+		return sede.getNombre();
+	}
+	
 	
 	public int getIdSala() {
 		return idSala;
@@ -42,10 +59,10 @@ public class Sala {
 	public void setRecursos(String recursos) {
 		this.recursos = recursos;
 	}
-	public Date getFechaRegistro() {
+	public Timestamp getFechaRegistro() {
 		return fechaRegistro;
 	}
-	public void setFechaRegistro(Date fechaRegistro) {
+	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 	public int getEstado() {
@@ -60,6 +77,7 @@ public class Sala {
 	public void setSede(Sede sede) {
 		this.sede = sede;
 	}
+	
 	
 	
 }
